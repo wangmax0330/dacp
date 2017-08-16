@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.pikai</groupId>
+    <artifactId>dacp-jetty</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>com.pikai</groupId>
+        <artifactId>dacp-parent</artifactId>
+        <version>1.0.0.RELEASE</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>
+            UTF-8
+        </project.build.sourceEncoding>
+        <spring.version>4.0.6.RELEASE</spring.version>
+        <jetty.version>9.3.7.RC1</jetty.version>
+        <javax.servlet.jsp>2.2.3</javax.servlet.jsp>
+        <javax.el>2.2.3</javax.el>
+        <javax.servlet.jsp.jstl>1.2.1</javax.servlet.jsp.jstl>
+    </properties>
+    <dependencies>
+        <!--<dependency>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-servlet</artifactId>-->
+        <!--<version>${jetty.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-server</artifactId>-->
+        <!--<version>${jetty.version}</version>-->
+        <!--</dependency>-->
+
+
+        <!--&lt;!&ndash; Jetty Webapp &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-webapp</artifactId>-->
+        <!--<version>${jetty.version}</version>-->
+        <!--</dependency>-->
+
+        <!-- JSP Support -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.servlet.jsp</artifactId>
+            <version>${javax.servlet.jsp}</version>
+        </dependency>
+
+        <!-- EL Support -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>${javax.el}</version>
+        </dependency>
+
+        <!-- JSTL Support -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.servlet.jsp.jstl</artifactId>
+            <version>${javax.servlet.jsp.jstl}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jstl-api</artifactId>
+                    <groupId>javax.servlet.jsp.jstl</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.aggregate</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>8.1.16.v20140903</version>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pikai.mapper.HouseMapper" >
+  <resultMap id="HouseDomainResultMap" type="com.pikai.domain.HouseDomain" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="fav_count" property="favCount" jdbcType="INTEGER" />
+    <result column="cart_count" property="cartCount" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="first_pay_price" property="firstPayPrice" jdbcType="DECIMAL" />
+    <result column="tax_price" property="taxPrice" jdbcType="DECIMAL" />
+    <result column="room_main_info" property="roomMainInfo" jdbcType="VARCHAR" />
+    <result column="room_main_type" property="roomMainType" jdbcType="VARCHAR" />
+    <result column="room_sub_type" property="roomSubType" jdbcType="VARCHAR" />
+    <result column="area_main_info" property="areaMainInfo" jdbcType="VARCHAR" />
+    <result column="area_sub_info" property="areaSubInfo" jdbcType="VARCHAR" />
+    <result column="community_name" property="communityName" jdbcType="VARCHAR" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="school_name" property="schoolName" jdbcType="VARCHAR" />
+    <result column="tags" property="tags" jdbcType="VARCHAR" />
+    <result column="decorating_desc" property="decoratingDesc" jdbcType="VARCHAR" />
+    <result column="house_type_desc" property="houseTypeDesc" jdbcType="VARCHAR" />
+    <result column="investment_desc" property="investmentDesc" jdbcType="VARCHAR" />
+    <result column="village_desc" property="villageDesc" jdbcType="VARCHAR" />
+    <result column="school_desc" property="schoolDesc" jdbcType="VARCHAR" />
+    <result column="selling_point_desc" property="sellingPointDesc" jdbcType="VARCHAR" />
+    <result column="reason4sale_desc" property="reason4saleDesc" jdbcType="VARCHAR" />
+    <result column="supporting_desc" property="supportingDesc" jdbcType="VARCHAR" />
+    <result column="traffic_desc" property="trafficDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="base_content1" property="baseContent1" jdbcType="VARCHAR" />
+    <result column="base_content2" property="baseContent2" jdbcType="VARCHAR" />
+    <result column="base_content3" property="baseContent3" jdbcType="VARCHAR" />
+    <result column="base_content4" property="baseContent4" jdbcType="VARCHAR" />
+    <result column="base_content5" property="baseContent5" jdbcType="VARCHAR" />
+    <result column="base_content6" property="baseContent6" jdbcType="VARCHAR" />
+    <result column="base_content7" property="baseContent7" jdbcType="VARCHAR" />
+    <result column="base_content8" property="baseContent8" jdbcType="VARCHAR" />
+    <result column="base_content9" property="baseContent9" jdbcType="VARCHAR" />
+    <result column="base_content10" property="baseContent10" jdbcType="VARCHAR" />
+    <result column="base_content11" property="baseContent11" jdbcType="VARCHAR" />
+    <result column="base_content12" property="baseContent12" jdbcType="VARCHAR" />
+    <result column="transaction_content1" property="transactionContent1" jdbcType="VARCHAR" />
+    <result column="transaction_content2" property="transactionContent2" jdbcType="VARCHAR" />
+    <result column="transaction_content3" property="transactionContent3" jdbcType="VARCHAR" />
+    <result column="transaction_content4" property="transactionContent4" jdbcType="VARCHAR" />
+    <result column="transaction_content5" property="transactionContent5" jdbcType="VARCHAR" />
+    <result column="transaction_content6" property="transactionContent6" jdbcType="VARCHAR" />
+    <result column="transaction_content7" property="transactionContent7" jdbcType="VARCHAR" />
+    <result column="transaction_content8" property="transactionContent8" jdbcType="VARCHAR" />
+    <result column="transaction_content9" property="transactionContent9" jdbcType="VARCHAR" />
+    <result column="transaction_content10" property="transactionContent10" jdbcType="VARCHAR" />
+    <result column="html" property="html" jdbcType="LONGVARCHAR" />
+    <result column="chengjiao_price" property="chengjiaoPrice" jdbcType="DECIMAL" />
+    <result column="room_sub_info" property="roomSubInfo" jdbcType="VARCHAR" />
+    <result column="room_size" property="roomSize" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="HouseDomain_Column_List" >
+    id, code, url, title, subtitle, fav_count, cart_count, price, unit_price, first_pay_price,
+    tax_price, room_main_info, room_main_type, room_sub_type, area_main_info, area_sub_info,
+    community_name, area_name, school_name, tags, decorating_desc, house_type_desc, investment_desc,
+    village_desc, school_desc, selling_point_desc, reason4sale_desc, supporting_desc,
+    traffic_desc, create_time, base_content1, base_content2, base_content3, base_content4,
+    base_content5, base_content6, base_content7, base_content8, base_content9, base_content10,
+    base_content11, base_content12, transaction_content1, transaction_content2, transaction_content3,
+    transaction_content4, transaction_content5, transaction_content6, transaction_content7,
+    transaction_content8, transaction_content9, transaction_content10, html, chengjiao_price,
+    room_sub_info, room_size
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="HouseDomainResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="HouseDomain_Column_List" />
+    from house
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from house
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.pikai.domain.HouseDomain" useGeneratedKeys="true" keyProperty="id" >
+    insert into house (code, url, title, subtitle, fav_count, cart_count, price,
+    unit_price, first_pay_price, tax_price, room_main_info, room_main_type,
+    room_sub_type, area_main_info, area_sub_info, community_name, area_name,
+    school_name, tags, decorating_desc, house_type_desc, investment_desc,
+    village_desc, school_desc, selling_point_desc, reason4sale_desc, supporting_desc,
+    traffic_desc, create_time, base_content1, base_content2, base_content3,
+    base_content4, base_content5, base_content6, base_content7, base_content8,
+    base_content9, base_content10, base_content11, base_content12, transaction_content1,
+    transaction_content2, transaction_content3, transaction_content4, transaction_content5,
+    transaction_content6, transaction_content7, transaction_content8, transaction_content9,
+    transaction_content10, html, chengjiao_price, room_sub_info, room_size
+    )
+    values (#{code}, #{url}, #{title}, #{subtitle}, #{favCount}, #{cartCount}, #{price},
+    #{unitPrice}, #{firstPayPrice}, #{taxPrice}, #{roomMainInfo}, #{roomMainType},
+    #{roomSubType}, #{areaMainInfo}, #{areaSubInfo}, #{communityName}, #{areaName},
+    #{schoolName}, #{tags}, #{decoratingDesc}, #{houseTypeDesc}, #{investmentDesc},
+    #{villageDesc}, #{schoolDesc}, #{sellingPointDesc}, #{reason4saleDesc}, #{supportingDesc},
+    #{trafficDesc}, #{createTime}, #{baseContent1}, #{baseContent2}, #{baseContent3},
+    #{baseContent4}, #{baseContent5}, #{baseContent6}, #{baseContent7}, #{baseContent8},
+    #{baseContent9}, #{baseContent10}, #{baseContent11}, #{baseContent12}, #{transactionContent1},
+    #{transactionContent2}, #{transactionContent3}, #{transactionContent4}, #{transactionContent5},
+    #{transactionContent6}, #{transactionContent7}, #{transactionContent8}, #{transactionContent9},
+    #{transactionContent10}, #{html}, #{chengjiaoPrice}, #{roomSubInfo}, #{roomSize}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pikai.domain.HouseDomain" >
+    insert into house
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="subtitle != null" >
+        subtitle,
+      </if>
+      <if test="favCount != null" >
+        fav_count,
+      </if>
+      <if test="cartCount != null" >
+        cart_count,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="firstPayPrice != null" >
+        first_pay_price,
+      </if>
+      <if test="taxPrice != null" >
+        tax_price,
+      </if>
+      <if test="roomMainInfo != null" >
+        room_main_info,
+      </if>
+      <if test="roomMainType != null" >
+        room_main_type,
+      </if>
+      <if test="roomSubType != null" >
+        room_sub_type,
+      </if>
+      <if test="areaMainInfo != null" >
+        area_main_info,
+      </if>
+      <if test="areaSubInfo != null" >
+        area_sub_info,
+      </if>
+      <if test="communityName != null" >
+        community_name,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="schoolName != null" >
+        school_name,
+      </if>
+      <if test="tags != null" >
+        tags,
+      </if>
+      <if test="decoratingDesc != null" >
+        decorating_desc,
+      </if>
+      <if test="houseTypeDesc != null" >
+        house_type_desc,
+      </if>
+      <if test="investmentDesc != null" >
+        investment_desc,
+      </if>
+      <if test="villageDesc != null" >
+        village_desc,
+      </if>
+      <if test="schoolDesc != null" >
+        school_desc,
+      </if>
+      <if test="sellingPointDesc != null" >
+        selling_point_desc,
+      </if>
+      <if test="reason4saleDesc != null" >
+        reason4sale_desc,
+      </if>
+      <if test="supportingDesc != null" >
+        supporting_desc,
+      </if>
+      <if test="trafficDesc != null" >
+        traffic_desc,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="baseContent1 != null" >
+        base_content1,
+      </if>
+      <if test="baseContent2 != null" >
+        base_content2,
+      </if>
+      <if test="baseContent3 != null" >
+        base_content3,
+      </if>
+      <if test="baseContent4 != null" >
+        base_content4,
+      </if>
+      <if test="baseContent5 != null" >
+        base_content5,
+      </if>
+      <if test="baseContent6 != null" >
+        base_content6,
+      </if>
+      <if test="baseContent7 != null" >
+        base_content7,
+      </if>
+      <if test="baseContent8 != null" >
+        base_content8,
+      </if>
+      <if test="baseContent9 != null" >
+        base_content9,
+      </if>
+      <if test="baseContent10 != null" >
+        base_content10,
+      </if>
+      <if test="baseContent11 != null" >
+        base_content11,
+      </if>
+      <if test="baseContent12 != null" >
+        base_content12,
+      </if>
+      <if test="transactionContent1 != null" >
+        transaction_content1,
+      </if>
+      <if test="transactionContent2 != null" >
+        transaction_content2,
+      </if>
+      <if test="transactionContent3 != null" >
+        transaction_content3,
+      </if>
+      <if test="transactionContent4 != null" >
+        transaction_content4,
+      </if>
+      <if test="transactionContent5 != null" >
+        transaction_content5,
+      </if>
+      <if test="transactionContent6 != null" >
+        transaction_content6,
+      </if>
+      <if test="transactionContent7 != null" >
+        transaction_content7,
+      </if>
+      <if test="transactionContent8 != null" >
+        transaction_content8,
+      </if>
+      <if test="transactionContent9 != null" >
+        transaction_content9,
+      </if>
+      <if test="transactionContent10 != null" >
+        transaction_content10,
+      </if>
+      <if test="html != null" >
+        html,
+      </if>
+      <if test="chengjiaoPrice != null" >
+        chengjiao_price,
+      </if>
+      <if test="roomSubInfo != null" >
+        room_sub_info,
+      </if>
+      <if test="roomSize != null" >
+        room_size,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="code != null" >
+        #{code},
+      </if>
+      <if test="url != null" >
+        #{url},
+      </if>
+      <if test="title != null" >
+        #{title},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle},
+      </if>
+      <if test="favCount != null" >
+        #{favCount},
+      </if>
+      <if test="cartCount != null" >
+        #{cartCount},
+      </if>
+      <if test="price != null" >
+        #{price},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice},
+      </if>
+      <if test="firstPayPrice != null" >
+        #{firstPayPrice},
+      </if>
+      <if test="taxPrice != null" >
+        #{taxPrice},
+      </if>
+      <if test="roomMainInfo != null" >
+        #{roomMainInfo},
+      </if>
+      <if test="roomMainType != null" >
+        #{roomMainType},
+      </if>
+      <if test="roomSubType != null" >
+        #{roomSubType},
+      </if>
+      <if test="areaMainInfo != null" >
+        #{areaMainInfo},
+      </if>
+      <if test="areaSubInfo != null" >
+        #{areaSubInfo},
+      </if>
+      <if test="communityName != null" >
+        #{communityName},
+      </if>
+      <if test="areaName != null" >
+        #{areaName},
+      </if>
+      <if test="schoolName != null" >
+        #{schoolName},
+      </if>
+      <if test="tags != null" >
+        #{tags},
+      </if>
+      <if test="decoratingDesc != null" >
+        #{decoratingDesc},
+      </if>
+      <if test="houseTypeDesc != null" >
+        #{houseTypeDesc},
+      </if>
+      <if test="investmentDesc != null" >
+        #{investmentDesc},
+      </if>
+      <if test="villageDesc != null" >
+        #{villageDesc},
+      </if>
+      <if test="schoolDesc != null" >
+        #{schoolDesc},
+      </if>
+      <if test="sellingPointDesc != null" >
+        #{sellingPointDesc},
+      </if>
+      <if test="reason4saleDesc != null" >
+        #{reason4saleDesc},
+      </if>
+      <if test="supportingDesc != null" >
+        #{supportingDesc},
+      </if>
+      <if test="trafficDesc != null" >
+        #{trafficDesc},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+      <if test="baseContent1 != null" >
+        #{baseContent1},
+      </if>
+      <if test="baseContent2 != null" >
+        #{baseContent2},
+      </if>
+      <if test="baseContent3 != null" >
+        #{baseContent3},
+      </if>
+      <if test="baseContent4 != null" >
+        #{baseContent4},
+      </if>
+      <if test="baseContent5 != null" >
+        #{baseContent5},
+      </if>
+      <if test="baseContent6 != null" >
+        #{baseContent6},
+      </if>
+      <if test="baseContent7 != null" >
+        #{baseContent7},
+      </if>
+      <if test="baseContent8 != null" >
+        #{baseContent8},
+      </if>
+      <if test="baseContent9 != null" >
+        #{baseContent9},
+      </if>
+      <if test="baseContent10 != null" >
+        #{baseContent10},
+      </if>
+      <if test="baseContent11 != null" >
+        #{baseContent11},
+      </if>
+      <if test="baseContent12 != null" >
+        #{baseContent12},
+      </if>
+      <if test="transactionContent1 != null" >
+        #{transactionContent1},
+      </if>
+      <if test="transactionContent2 != null" >
+        #{transactionContent2},
+      </if>
+      <if test="transactionContent3 != null" >
+        #{transactionContent3},
+      </if>
+      <if test="transactionContent4 != null" >
+        #{transactionContent4},
+      </if>
+      <if test="transactionContent5 != null" >
+        #{transactionContent5},
+      </if>
+      <if test="transactionContent6 != null" >
+        #{transactionContent6},
+      </if>
+      <if test="transactionContent7 != null" >
+        #{transactionContent7},
+      </if>
+      <if test="transactionContent8 != null" >
+        #{transactionContent8},
+      </if>
+      <if test="transactionContent9 != null" >
+        #{transactionContent9},
+      </if>
+      <if test="transactionContent10 != null" >
+        #{transactionContent10},
+      </if>
+      <if test="html != null" >
+        #{html},
+      </if>
+      <if test="chengjiaoPrice != null" >
+        #{chengjiaoPrice},
+      </if>
+      <if test="roomSubInfo != null" >
+        #{roomSubInfo},
+      </if>
+      <if test="roomSize != null" >
+        #{roomSize},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pikai.domain.HouseDomain" >
+    update house
+    <set >
+      <if test="code != null" >
+        code = #{code},
+      </if>
+      <if test="url != null" >
+        url = #{url},
+      </if>
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="subtitle != null" >
+        subtitle = #{subtitle},
+      </if>
+      <if test="favCount != null" >
+        fav_count = #{favCount},
+      </if>
+      <if test="cartCount != null" >
+        cart_count = #{cartCount},
+      </if>
+      <if test="price != null" >
+        price = #{price},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice},
+      </if>
+      <if test="firstPayPrice != null" >
+        first_pay_price = #{firstPayPrice},
+      </if>
+      <if test="taxPrice != null" >
+        tax_price = #{taxPrice},
+      </if>
+      <if test="roomMainInfo != null" >
+        room_main_info = #{roomMainInfo},
+      </if>
+      <if test="roomMainType != null" >
+        room_main_type = #{roomMainType},
+      </if>
+      <if test="roomSubType != null" >
+        room_sub_type = #{roomSubType},
+      </if>
+      <if test="areaMainInfo != null" >
+        area_main_info = #{areaMainInfo},
+      </if>
+      <if test="areaSubInfo != null" >
+        area_sub_info = #{areaSubInfo},
+      </if>
+      <if test="communityName != null" >
+        community_name = #{communityName},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName},
+      </if>
+      <if test="schoolName != null" >
+        school_name = #{schoolName},
+      </if>
+      <if test="tags != null" >
+        tags = #{tags},
+      </if>
+      <if test="decoratingDesc != null" >
+        decorating_desc = #{decoratingDesc},
+      </if>
+      <if test="houseTypeDesc != null" >
+        house_type_desc = #{houseTypeDesc},
+      </if>
+      <if test="investmentDesc != null" >
+        investment_desc = #{investmentDesc},
+      </if>
+      <if test="villageDesc != null" >
+        village_desc = #{villageDesc},
+      </if>
+      <if test="schoolDesc != null" >
+        school_desc = #{schoolDesc},
+      </if>
+      <if test="sellingPointDesc != null" >
+        selling_point_desc = #{sellingPointDesc},
+      </if>
+      <if test="reason4saleDesc != null" >
+        reason4sale_desc = #{reason4saleDesc},
+      </if>
+      <if test="supportingDesc != null" >
+        supporting_desc = #{supportingDesc},
+      </if>
+      <if test="trafficDesc != null" >
+        traffic_desc = #{trafficDesc},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="baseContent1 != null" >
+        base_content1 = #{baseContent1},
+      </if>
+      <if test="baseContent2 != null" >
+        base_content2 = #{baseContent2},
+      </if>
+      <if test="baseContent3 != null" >
+        base_content3 = #{baseContent3},
+      </if>
+      <if test="baseContent4 != null" >
+        base_content4 = #{baseContent4},
+      </if>
+      <if test="baseContent5 != null" >
+        base_content5 = #{baseContent5},
+      </if>
+      <if test="baseContent6 != null" >
+        base_content6 = #{baseContent6},
+      </if>
+      <if test="baseContent7 != null" >
+        base_content7 = #{baseContent7},
+      </if>
+      <if test="baseContent8 != null" >
+        base_content8 = #{baseContent8},
+      </if>
+      <if test="baseContent9 != null" >
+        base_content9 = #{baseContent9},
+      </if>
+      <if test="baseContent10 != null" >
+        base_content10 = #{baseContent10},
+      </if>
+      <if test="baseContent11 != null" >
+        base_content11 = #{baseContent11},
+      </if>
+      <if test="baseContent12 != null" >
+        base_content12 = #{baseContent12},
+      </if>
+      <if test="transactionContent1 != null" >
+        transaction_content1 = #{transactionContent1},
+      </if>
+      <if test="transactionContent2 != null" >
+        transaction_content2 = #{transactionContent2},
+      </if>
+      <if test="transactionContent3 != null" >
+        transaction_content3 = #{transactionContent3},
+      </if>
+      <if test="transactionContent4 != null" >
+        transaction_content4 = #{transactionContent4},
+      </if>
+      <if test="transactionContent5 != null" >
+        transaction_content5 = #{transactionContent5},
+      </if>
+      <if test="transactionContent6 != null" >
+        transaction_content6 = #{transactionContent6},
+      </if>
+      <if test="transactionContent7 != null" >
+        transaction_content7 = #{transactionContent7},
+      </if>
+      <if test="transactionContent8 != null" >
+        transaction_content8 = #{transactionContent8},
+      </if>
+      <if test="transactionContent9 != null" >
+        transaction_content9 = #{transactionContent9},
+      </if>
+      <if test="transactionContent10 != null" >
+        transaction_content10 = #{transactionContent10},
+      </if>
+      <if test="html != null" >
+        html = #{html},
+      </if>
+      <if test="chengjiaoPrice != null" >
+        chengjiao_price = #{chengjiaoPrice},
+      </if>
+      <if test="roomSubInfo != null" >
+        room_sub_info = #{roomSubInfo},
+      </if>
+      <if test="roomSize != null" >
+        room_size = #{roomSize},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pikai.domain.HouseDomain" >
+    update house
+    set code = #{code},
+    url = #{url},
+    title = #{title},
+    subtitle = #{subtitle},
+    fav_count = #{favCount},
+    cart_count = #{cartCount},
+    price = #{price},
+    unit_price = #{unitPrice},
+    first_pay_price = #{firstPayPrice},
+    tax_price = #{taxPrice},
+    room_main_info = #{roomMainInfo},
+    room_main_type = #{roomMainType},
+    room_sub_type = #{roomSubType},
+    area_main_info = #{areaMainInfo},
+    area_sub_info = #{areaSubInfo},
+    community_name = #{communityName},
+    area_name = #{areaName},
+    school_name = #{schoolName},
+    tags = #{tags},
+    decorating_desc = #{decoratingDesc},
+    house_type_desc = #{houseTypeDesc},
+    investment_desc = #{investmentDesc},
+    village_desc = #{villageDesc},
+    school_desc = #{schoolDesc},
+    selling_point_desc = #{sellingPointDesc},
+    reason4sale_desc = #{reason4saleDesc},
+    supporting_desc = #{supportingDesc},
+    traffic_desc = #{trafficDesc},
+    create_time = #{createTime},
+    base_content1 = #{baseContent1},
+    base_content2 = #{baseContent2},
+    base_content3 = #{baseContent3},
+    base_content4 = #{baseContent4},
+    base_content5 = #{baseContent5},
+    base_content6 = #{baseContent6},
+    base_content7 = #{baseContent7},
+    base_content8 = #{baseContent8},
+    base_content9 = #{baseContent9},
+    base_content10 = #{baseContent10},
+    base_content11 = #{baseContent11},
+    base_content12 = #{baseContent12},
+    transaction_content1 = #{transactionContent1},
+    transaction_content2 = #{transactionContent2},
+    transaction_content3 = #{transactionContent3},
+    transaction_content4 = #{transactionContent4},
+    transaction_content5 = #{transactionContent5},
+    transaction_content6 = #{transactionContent6},
+    transaction_content7 = #{transactionContent7},
+    transaction_content8 = #{transactionContent8},
+    transaction_content9 = #{transactionContent9},
+    transaction_content10 = #{transactionContent10},
+    html = #{html},
+    chengjiao_price = #{chengjiaoPrice},
+    room_sub_info = #{roomSubInfo},
+    room_size = #{roomSize}
+    where id = #{id}
+  </update>
+  <sql id="Where_Condition" >
+    <where >
+      <if test="code != null and code != ''" >
+        code = #{code}
+      </if>
+      <if test="url != null and url != ''" >
+        AND url = #{url}
+      </if>
+      <if test="title != null and title != ''" >
+        AND title = #{title}
+      </if>
+      <if test="subtitle != null and subtitle != ''" >
+        AND subtitle = #{subtitle}
+      </if>
+      <if test="favCount != null" >
+        AND fav_count = #{favCount}
+      </if>
+      <if test="cartCount != null" >
+        AND cart_count = #{cartCount}
+      </if>
+      <if test="price != null" >
+        AND price = #{price}
+      </if>
+      <if test="unitPrice != null" >
+        AND unit_price = #{unitPrice}
+      </if>
+      <if test="firstPayPrice != null" >
+        AND first_pay_price = #{firstPayPrice}
+      </if>
+      <if test="taxPrice != null" >
+        AND tax_price = #{taxPrice}
+      </if>
+      <if test="roomMainInfo != null and roomMainInfo != ''" >
+        AND room_main_info = #{roomMainInfo}
+      </if>
+      <if test="roomMainType != null and roomMainType != ''" >
+        AND room_main_type = #{roomMainType}
+      </if>
+      <if test="roomSubType != null and roomSubType != ''" >
+        AND room_sub_type = #{roomSubType}
+      </if>
+      <if test="areaMainInfo != null and areaMainInfo != ''" >
+        AND area_main_info = #{areaMainInfo}
+      </if>
+      <if test="areaSubInfo != null and areaSubInfo != ''" >
+        AND area_sub_info = #{areaSubInfo}
+      </if>
+      <if test="communityName != null and communityName != ''" >
+        AND community_name = #{communityName}
+      </if>
+      <if test="areaName != null and areaName != ''" >
+        AND area_name = #{areaName}
+      </if>
+      <if test="schoolName != null and schoolName != ''" >
+        AND school_name = #{schoolName}
+      </if>
+      <if test="tags != null and tags != ''" >
+        AND tags = #{tags}
+      </if>
+      <if test="decoratingDesc != null and decoratingDesc != ''" >
+        AND decorating_desc = #{decoratingDesc}
+      </if>
+      <if test="houseTypeDesc != null and houseTypeDesc != ''" >
+        AND house_type_desc = #{houseTypeDesc}
+      </if>
+      <if test="investmentDesc != null and investmentDesc != ''" >
+        AND investment_desc = #{investmentDesc}
+      </if>
+      <if test="villageDesc != null and villageDesc != ''" >
+        AND village_desc = #{villageDesc}
+      </if>
+      <if test="schoolDesc != null and schoolDesc != ''" >
+        AND school_desc = #{schoolDesc}
+      </if>
+      <if test="sellingPointDesc != null and sellingPointDesc != ''" >
+        AND selling_point_desc = #{sellingPointDesc}
+      </if>
+      <if test="reason4saleDesc != null and reason4saleDesc != ''" >
+        AND reason4sale_desc = #{reason4saleDesc}
+      </if>
+      <if test="supportingDesc != null and supportingDesc != ''" >
+        AND supporting_desc = #{supportingDesc}
+      </if>
+      <if test="trafficDesc != null and trafficDesc != ''" >
+        AND traffic_desc = #{trafficDesc}
+      </if>
+      <if test="createTime != null" >
+        AND create_time = #{createTime}
+      </if>
+      <if test="baseContent1 != null and baseContent1 != ''" >
+        AND base_content1 = #{baseContent1}
+      </if>
+      <if test="baseContent2 != null and baseContent2 != ''" >
+        AND base_content2 = #{baseContent2}
+      </if>
+      <if test="baseContent3 != null and baseContent3 != ''" >
+        AND base_content3 = #{baseContent3}
+      </if>
+      <if test="baseContent4 != null and baseContent4 != ''" >
+        AND base_content4 = #{baseContent4}
+      </if>
+      <if test="baseContent5 != null and baseContent5 != ''" >
+        AND base_content5 = #{baseContent5}
+      </if>
+      <if test="baseContent6 != null and baseContent6 != ''" >
+        AND base_content6 = #{baseContent6}
+      </if>
+      <if test="baseContent7 != null and baseContent7 != ''" >
+        AND base_content7 = #{baseContent7}
+      </if>
+      <if test="baseContent8 != null and baseContent8 != ''" >
+        AND base_content8 = #{baseContent8}
+      </if>
+      <if test="baseContent9 != null and baseContent9 != ''" >
+        AND base_content9 = #{baseContent9}
+      </if>
+      <if test="baseContent10 != null and baseContent10 != ''" >
+        AND base_content10 = #{baseContent10}
+      </if>
+      <if test="baseContent11 != null and baseContent11 != ''" >
+        AND base_content11 = #{baseContent11}
+      </if>
+      <if test="baseContent12 != null and baseContent12 != ''" >
+        AND base_content12 = #{baseContent12}
+      </if>
+      <if test="transactionContent1 != null and transactionContent1 != ''" >
+        AND transaction_content1 = #{transactionContent1}
+      </if>
+      <if test="transactionContent2 != null and transactionContent2 != ''" >
+        AND transaction_content2 = #{transactionContent2}
+      </if>
+      <if test="transactionContent3 != null and transactionContent3 != ''" >
+        AND transaction_content3 = #{transactionContent3}
+      </if>
+      <if test="transactionContent4 != null and transactionContent4 != ''" >
+        AND transaction_content4 = #{transactionContent4}
+      </if>
+      <if test="transactionContent5 != null and transactionContent5 != ''" >
+        AND transaction_content5 = #{transactionContent5}
+      </if>
+      <if test="transactionContent6 != null and transactionContent6 != ''" >
+        AND transaction_content6 = #{transactionContent6}
+      </if>
+      <if test="transactionContent7 != null and transactionContent7 != ''" >
+        AND transaction_content7 = #{transactionContent7}
+      </if>
+      <if test="transactionContent8 != null and transactionContent8 != ''" >
+        AND transaction_content8 = #{transactionContent8}
+      </if>
+      <if test="transactionContent9 != null and transactionContent9 != ''" >
+        AND transaction_content9 = #{transactionContent9}
+      </if>
+      <if test="transactionContent10 != null and transactionContent10 != ''" >
+        AND transaction_content10 = #{transactionContent10}
+      </if>
+      <if test="html != null and html != ''" >
+        AND html = #{html}
+      </if>
+      <if test="chengjiaoPrice != null" >
+        AND chengjiao_price = #{chengjiaoPrice}
+      </if>
+      <if test="roomSubInfo != null and roomSubInfo != ''" >
+        AND room_sub_info = #{roomSubInfo}
+      </if>
+      <if test="roomSize != null" >
+        AND room_size = #{roomSize}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByCondition" parameterType="com.pikai.domain.HouseDomain" resultMap="HouseDomainResultMap" >
+    select
+    <include refid="HouseDomain_Column_List" />
+    from house
+    <include refid="Where_Condition" />
+  </select>
+  <update id="updateByIdsSelective" >
+    update house
+    <set >
+      <if test="po.code != null" >
+        code = #{po.code},
+      </if>
+      <if test="po.url != null" >
+        url = #{po.url},
+      </if>
+      <if test="po.title != null" >
+        title = #{po.title},
+      </if>
+      <if test="po.subtitle != null" >
+        subtitle = #{po.subtitle},
+      </if>
+      <if test="po.favCount != null" >
+        fav_count = #{po.favCount},
+      </if>
+      <if test="po.cartCount != null" >
+        cart_count = #{po.cartCount},
+      </if>
+      <if test="po.price != null" >
+        price = #{po.price},
+      </if>
+      <if test="po.unitPrice != null" >
+        unit_price = #{po.unitPrice},
+      </if>
+      <if test="po.firstPayPrice != null" >
+        first_pay_price = #{po.firstPayPrice},
+      </if>
+      <if test="po.taxPrice != null" >
+        tax_price = #{po.taxPrice},
+      </if>
+      <if test="po.roomMainInfo != null" >
+        room_main_info = #{po.roomMainInfo},
+      </if>
+      <if test="po.roomMainType != null" >
+        room_main_type = #{po.roomMainType},
+      </if>
+      <if test="po.roomSubType != null" >
+        room_sub_type = #{po.roomSubType},
+      </if>
+      <if test="po.areaMainInfo != null" >
+        area_main_info = #{po.areaMainInfo},
+      </if>
+      <if test="po.areaSubInfo != null" >
+        area_sub_info = #{po.areaSubInfo},
+      </if>
+      <if test="po.communityName != null" >
+        community_name = #{po.communityName},
+      </if>
+      <if test="po.areaName != null" >
+        area_name = #{po.areaName},
+      </if>
+      <if test="po.schoolName != null" >
+        school_name = #{po.schoolName},
+      </if>
+      <if test="po.tags != null" >
+        tags = #{po.tags},
+      </if>
+      <if test="po.decoratingDesc != null" >
+        decorating_desc = #{po.decoratingDesc},
+      </if>
+      <if test="po.houseTypeDesc != null" >
+        house_type_desc = #{po.houseTypeDesc},
+      </if>
+      <if test="po.investmentDesc != null" >
+        investment_desc = #{po.investmentDesc},
+      </if>
+      <if test="po.villageDesc != null" >
+        village_desc = #{po.villageDesc},
+      </if>
+      <if test="po.schoolDesc != null" >
+        school_desc = #{po.schoolDesc},
+      </if>
+      <if test="po.sellingPointDesc != null" >
+        selling_point_desc = #{po.sellingPointDesc},
+      </if>
+      <if test="po.reason4saleDesc != null" >
+        reason4sale_desc = #{po.reason4saleDesc},
+      </if>
+      <if test="po.supportingDesc != null" >
+        supporting_desc = #{po.supportingDesc},
+      </if>
+      <if test="po.trafficDesc != null" >
+        traffic_desc = #{po.trafficDesc},
+      </if>
+      <if test="po.createTime != null" >
+        create_time = #{po.createTime},
+      </if>
+      <if test="po.baseContent1 != null" >
+        base_content1 = #{po.baseContent1},
+      </if>
+      <if test="po.baseContent2 != null" >
+        base_content2 = #{po.baseContent2},
+      </if>
+      <if test="po.baseContent3 != null" >
+        base_content3 = #{po.baseContent3},
+      </if>
+      <if test="po.baseContent4 != null" >
+        base_content4 = #{po.baseContent4},
+      </if>
+      <if test="po.baseContent5 != null" >
+        base_content5 = #{po.baseContent5},
+      </if>
+      <if test="po.baseContent6 != null" >
+        base_content6 = #{po.baseContent6},
+      </if>
+      <if test="po.baseContent7 != null" >
+        base_content7 = #{po.baseContent7},
+      </if>
+      <if test="po.baseContent8 != null" >
+        base_content8 = #{po.baseContent8},
+      </if>
+      <if test="po.baseContent9 != null" >
+        base_content9 = #{po.baseContent9},
+      </if>
+      <if test="po.baseContent10 != null" >
+        base_content10 = #{po.baseContent10},
+      </if>
+      <if test="po.baseContent11 != null" >
+        base_content11 = #{po.baseContent11},
+      </if>
+      <if test="po.baseContent12 != null" >
+        base_content12 = #{po.baseContent12},
+      </if>
+      <if test="po.transactionContent1 != null" >
+        transaction_content1 = #{po.transactionContent1},
+      </if>
+      <if test="po.transactionContent2 != null" >
+        transaction_content2 = #{po.transactionContent2},
+      </if>
+      <if test="po.transactionContent3 != null" >
+        transaction_content3 = #{po.transactionContent3},
+      </if>
+      <if test="po.transactionContent4 != null" >
+        transaction_content4 = #{po.transactionContent4},
+      </if>
+      <if test="po.transactionContent5 != null" >
+        transaction_content5 = #{po.transactionContent5},
+      </if>
+      <if test="po.transactionContent6 != null" >
+        transaction_content6 = #{po.transactionContent6},
+      </if>
+      <if test="po.transactionContent7 != null" >
+        transaction_content7 = #{po.transactionContent7},
+      </if>
+      <if test="po.transactionContent8 != null" >
+        transaction_content8 = #{po.transactionContent8},
+      </if>
+      <if test="po.transactionContent9 != null" >
+        transaction_content9 = #{po.transactionContent9},
+      </if>
+      <if test="po.transactionContent10 != null" >
+        transaction_content10 = #{po.transactionContent10},
+      </if>
+      <if test="po.html != null" >
+        html = #{po.html},
+      </if>
+      <if test="po.chengjiaoPrice != null" >
+        chengjiao_price = #{po.chengjiaoPrice},
+      </if>
+      <if test="po.roomSubInfo != null" >
+        room_sub_info = #{po.roomSubInfo},
+      </if>
+      <if test="po.roomSize != null" >
+        room_size = #{po.roomSize},
+      </if>
+    </set>
+    where 1=2
+    <if test="ids != null and ids.size > 0" >
+      <foreach collection="ids" item="listItem" open="or id in(" close=")" separator="," >
+        #{listItem}
+      </foreach>
+    </if>
+  </update>
+</mapper>

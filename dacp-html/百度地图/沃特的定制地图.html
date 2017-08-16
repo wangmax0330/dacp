@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+    body,
+    html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-family: "微软雅黑";
+    }
+    
+    #allmap {
+        width: 100%;
+        height: 500px;
+    }
+    
+    p {
+        margin-left: 5px;
+        font-size: 14px;
+    }
+    
+    #controller_panel {
+        width: 50%;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    #r-result {
+        width: 50%;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    #result {
+        width: 50%;
+        float: right;
+    }
+    </style>
+    <!--    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"></script> -->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+    // 测距需要的js库
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js"></script>
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <title>给多个点添加信息窗口</title>
+</head>
+
+<body>
+    <div id="allmap"></div>
+    <p>点击标注点，可查看由纯文本构成的简单型信息窗口</p>
+    <div id="controller_panel">
+        <input type="button" value="切换全屏显示" onclick="changeSize()" />
+        <br /> 楼盘名称:
+        <input type="text" name="searchName" />
+        <input type="button" value="检索" onclick="searchAnything()" />
+        <br />
+        <div style=" width:50px; height:50px; background-color:#F00; border-radius:25px;">
+            <span style="height:50px; line-height:50px; display:block; color:#FFF; text-align:center">4</span>
+        </div>
+        <div style=" width:50px; height:50px; background-color:#F00; border-radius:25px;">
+            <span style="height:50px; line-height:50px; display:block; color:#FFF; text-align:center">4</span>
+        </div>
+        <div style=" width:50px; height:50px; background-color:#F00; border-radius:25px;">
+            <span style="height:50px; line-height:50px; display:block; color:#FFF; text-align:center">4</span>
+        </div>
+        <input type="text" name="buildingName" />
+        <input type="button" value="添加标注" onclick="addMark()" />
+          <br /> 
+          楼盘名称:<input type="text" name="buildingName" />
+        <input type="button" value="搜索楼盘" onclick="searchBuilding()" />
+
+        <br />
+    </div>
+    <div id="r-result"></div>
+</body>
+
+</html>
+<script type="text/javascript">
+var index = 0; //数量
+var CITY = "成都市";
+
+// 百度地图API功能    
+map = new BMap.Map("allmap");
+// var point = new BMap.Point(116.331398, 39.897445);
+map.centerAndZoom(CITY, 12);
+map.enableScrollWheelZoom(true);
+
+var changeSizeClickFlag = false;
+
+/**
+ * [changeSize 改变地图大小]
+ * @return {[type]} [description]
+ */
+function changeSize() {
+    var showMap = document.getElementById("allmap");
+    if (changeSizeClickFlag) {
+        showMap.style.width = "100%";
+        showMap.style.height = 400 + "px";
+        changeSizeClickFlag = false;
+    } else {
+        showMap.style.width = (document.documentElement.clientWidth) + "px";
+        showMap.style.height = (document.documentElement.clientHeight - 100) + "px";
+        changeSizeClickFlag = true;
+    }
+}
+// map.centerAndZoom(new BMap.Point(116.417854,39.921988), 15);
+// 编写自定义函数,创建标注
+function addMarker(point, label) {
+    var marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+    marker.setLabel(label);
+}
+
+/**
+ * [search 百度地图关键词搜索]
+ * @param  {[type]} fuzzySearch [description]
+ * @return {[type]}             [description]
+ */
+function search(fuzzySearch) {
+    console.info("正在搜索中............" + fuzzySearch);
+    console.debug(map);
+
+    var options = {
+        onSearchComplete: function(results) {
+            // 判断状态是否正确,处理查询的结果,用于自定义
+            if (local.getStatus() == BMAP_STATUS_SUCCESS) {
+                // var s = [];
+                // for (var i = 0; i < results.getCurrentNumPois(); i++) {
+                //     s.push(results.getPoi(i).title + ", " + results.getPoi(i).address);
+                // }
+                // document.getElementById("r-result").innerHTML = s.join("<br/>");
+            }
+        },
+        renderOptions: {
+            map: map,
+            panel: "r-result"
+        }
+    };
+    var local = new BMap.LocalSearch(map, options);
+    //    var local = new BMap.LocalSearch(map, {
+    //  renderOptions: {map: map, panel: "r-result"}
+    // });
+    console.debug(map);
+    local.search(fuzzySearch);
+    // var local = new BMap.LocalSearch(map, {
+    //  renderOptions: {map: map, panel: "r-result"}
+    // });
+    // local.search("餐饮");
+}
+/**
+ * 添加地图右键菜单
+ */
+var menu = new BMap.ContextMenu();
+var txtMenuItem = [{
+    text: '添加点',
+    callback: function() {
+        alert('添加点');
+
+        addPointMarker();
+    }
+}, {
+    text: '测距',
+    callback: function() {
+        var myDis = new BMapLib.DistanceTool(map);
+        map.addEventListener("load",function(){
+            myDis.open();  //开启鼠标测距
+            //myDis.close();  //关闭鼠标测距大
+        });
+    }
+}, {
+    text: '删除所有点',
+    callback: function() {
+       map.clearOverlays();         
+    }
+}];
+for (var i = 0; i < txtMenuItem.length; i++) {
+    menu.addItem(new BMap.MenuItem(txtMenuItem[i].text, txtMenuItem[i].callback, 100));
+}
+map.addContextMenu(menu);
+
+
+
+//右键单击marker出现右键菜单事件
+function RightClickHandler(stationId,marker){
+    var removeMarker = function(e,ee,marker){//右键删除站点
+            var json={
+                    "StationId":stationId,
+            };
+            // if (confirm("要删除站点"+stationId+"吗？")){
+            //     if(true){
+            //         $.getJSON("./DeleteStationServlet",{json:JSON.stringify(json)},function(json){
+            //             if(json.result==true){
+            //                 alert("删除站点"+stationId+"成功！");
+            //                 map.removeOverlay(marker);               //将地图中的标记删除
+            //             }        
+            //         });
+            //     }
+            // }    
+    };
+    var updateMarker = function(marker){//右键更新站名
+        if (confirm("要修改站点"+stationId+"的站名吗？")){
+            // if(true){
+            //     $(".AllUpdateMassage").show();
+            //     $("#stationId").val(stationId);
+            // }
+        }    
+    };
+    var markerMenu=new BMap.ContextMenu();
+    markerMenu.addItem(new BMap.MenuItem('删除站点',removeMarker.bind(marker)));
+    markerMenu.addItem(new BMap.MenuItem('修改站名',updateMarker.bind(marker)));
+    marker.addContextMenu(markerMenu);//给标记添加右键菜单
+}
+//鼠标左键单击marker事件
+function addClickHandler(stationId,marker){
+    marker.addEventListener("click",function(e){                    
+        var p = marker.getPosition();                                             //获取marker的位置
+        var staId={
+                "StationId":stationId,
+        };
+        // $.getJSON("./GetStationInfoServlet",{json:JSON.stringify(staId)},function(json){
+
+        //     for(var i=0;i<json.length;i++){
+        //         var obj1 = eval(json);
+
+        //         stationName = obj1[i].stationName;
+
+        //         var content = "站点编号："+stationId+"<br/>"+ "站点名称："+stationName;
+        //         openInfo(content,e);
+        //     }
+        // });
+    });
+}
+//左键单击marker弹出窗口事件
+function openInfo(content,e){
+    var p = e.target;
+    var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+    var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
+    map.openInfoWindow(infoWindow,point);                  //开启信息窗口
+}
+</script>
+
+
+
+
+<script type="text/javascript">
+// 创建地址解析器实例
+var myGeo = new BMap.Geocoder();
+
+/** [start 关键词搜索] */
+function searchAnything() {
+    var address = $("input[name='searchName']").val();
+    if (address == '') {
+        alert("搜索空白");
+        return;
+    }
+    search(address);
+}
+
+/** [start 关键词搜索] */
+function searchBuilding() {
+    var address = $("input[name='searchBuilding']").val();
+    if (address == '') {
+        alert("搜索空白");
+        return;
+    }
+    geocodeSearch(address);
+}
+/**
+ * [addPointMarker 添加一个Marker]
+ */
+function addPointMarker(addressPoint){
+    addMarker(addressPoint, new BMap.Label(index + ":" + {
+        offset: new BMap.Size(20, -10)
+    }));
+    
+    //给这个点添加右键菜单
+    var marker = new BMap.Marker(addressPoint);
+    map.addOverlay(marker);
+    marker.addContextMenu(markerMenu);
+}
+
+
+
+/**
+ * [geocodeSearch 绝对定位搜索]
+ * @param  {[type]} address [description]
+ * @return {[type]}         [description]
+ */
+function geocodeSearch(address) {
+    console.info("---------------------" + address);
+    myGeo.getPoint(address, function(point) {
+        if (point) {
+            // var saveResult = saveLocationLngLat(add, point.lng, point.lat);
+            document.getElementById("result").innerHTML += index + "------" + "<font color='blue'> 经度纬度: " + point.lng + " , " + point.lat + "</font></br>";
+            var addressPoint = new BMap.Point(point.lng, point.lat);
+            addMarker(addressPoint, new BMap.Label(index + ":" + address, {
+                offset: new BMap.Size(20, -10)
+            }));
+            
+            //给这个点添加右键菜单
+            var marker = new BMap.Marker(addressPoint);
+            RightClickHandler(1,marker);
+
+        } else {
+            document.getElementById("result").innerHTML += "<font color='red'" + index + "------" + "找不到[ " + address + "] 的经纬度!!!</font>"
+            "</br>";
+        }
+    }, CITY);
+}
+// var data_info = [[116.417854,39.921988,"地址：北京市东城区王府井大街88号乐天银泰百货八层"],
+//               [116.406605,39.921585,"地址：北京市东城区东华门大街"],
+//               [116.412222,39.912345,"地址：北京市东城区正义路甲5号"]
+//              ];
+
+
+
+// var opts = {
+//          width : 250,     // 信息窗口宽度
+//          height: 80,     // 信息窗口高度
+//          title : "信息窗口" , // 信息窗口标题
+//          enableMessage:true//设置允许信息窗发送短息
+//         };
+// for(var i=0;i<data_info.length;i++){
+//  var marker = new BMap.Marker(new BMap.Point(data_info[i][0],data_info[i][1]));  // 创建标注
+//  var content = data_info[i][2];
+//  map.addOverlay(marker);               // 将标注添加到地图中
+//  addClickHandler(content,marker);
+// }
+// function addClickHandler(content,marker){
+//  marker.addEventListener("click",function(e){
+//      openInfo(content,e)}
+//  );
+// }
+// function openInfo(content,e){
+//  var p = e.target;
+//  var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+//  var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
+//  map.openInfoWindow(infoWindow,point); //开启信息窗口
+// }
+</script>

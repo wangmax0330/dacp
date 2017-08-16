@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.pikai</groupId>
+    <artifactId>dacp</artifactId>
+    <version>1.0.0.RELEASE</version>
+    <packaging>pom</packaging>
+    <properties>
+        <project.build.sourceEncoding>
+            UTF-8
+        </project.build.sourceEncoding>
+    </properties>
+    <modules>
+        <module>dacp-parent</module>
+        <module>dacp-core</module>
+        <module>dacp-cache</module>
+        <module>dacp-jdbc</module>
+        <module>dacp-sources</module>
+        <module>dacp-demo</module>
+        <module>dacp-test</module>
+        <module>dacp-jetty</module>
+        <module>dacp-servlet</module>
+        <module>dacp-druid</module>
+        <module>dacp-rocketmq</module>
+        <module>dacp-redis</module>
+        <module>dacp-http</module>
+        <module>dacp-mpush</module>
+    </modules>
+</project>

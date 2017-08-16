@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="taotao" version="2.5">
+    <display-name>app</display-name>
+
+
+    <!-- 配置WEB应用的初始化参数 -->
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:mysql://localhost:3306/test</param-value>
+    </context-param>
+    <context-param>
+        <param-name>appName</param-name>
+        <param-value>测试</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>com.pikai.IndexServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <!--请iqu-->
+    <servlet>
+        <servlet-name>EntryServlet</servlet-name>
+        <servlet-class>com.pikai.EntryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EntryServlet</servlet-name>
+        <url-pattern>/EntryServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ConfigServlet</servlet-name>
+        <servlet-class>com.pikai.ConfigServlet</servlet-class>
+        <!--配置ServletConfigDemo1的初始化参数 -->
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>gacl</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>123</param-value>
+        </init-param>
+        <init-param>
+            <param-name>charset</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfigServlet</servlet-name>
+        <url-pattern>/ConfigServlet</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <!-- not find -->
+    <!--<error-page>-->
+    <!--<error-code>404</error-code>-->
+    <!--<location>/page/res.failure</location>-->
+    <!--</error-page>-->
+    <!--<error-page>-->
+    <!--<error-code>500</error-code>-->
+    <!--<location>/page/res.failure</location>-->
+    <!--</error-page>-->
+    <!--<error-page>-->
+    <!--<error-code>503</error-code>-->
+    <!--<location>/page/res.failure</location>-->
+    <!--</error-page>-->
+</web-app>

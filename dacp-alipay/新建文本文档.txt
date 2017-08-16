@@ -1,0 +1,8 @@
+alipay.refund.notify.url=http://121.42.44.8/alipay_refund_notify
+alipay.seller.email=yayaxueche@manzz.com
+#银联商户ID
+unionpay.merchant.id=305510141311001
+#银联相应地址
+unionpay.trade.back.url=http://192.168.0.200/unionpay_trade_notify
+unionpay.cancel.back.url=http://192.168.0.200/unionpay_cancel_notify
+unionpay.refund.back.url=http://192.168.0.200/unionpay_refund_notify
