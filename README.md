@@ -2,7 +2,6 @@
 
 ##dacp-app-lianjia
 成都链家网房产数据爬虫
-
 ![](image/20170922233912.jpg)
 
 ##dacp-core
